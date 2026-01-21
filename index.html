@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warmindo Dua Putra - Ngopi & Diskusi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    
+    <!-- Konfigurasi Tailwind Kustom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            300: '#e0cec7',
+                            400: '#d2bab0',
+                            500: '#a1887f',
+                            600: '#8d6e63',
+                            700: '#6d4c41', // Coklat Utama
+                            800: '#4e342e',
+                            900: '#3e2723', // Coklat Gelap
+                        },
+                        gold: '#ffb300',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* CSS Tambahan untuk efek parallax dan styling khusus */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Animasi loading gambar */
+        img {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6d4c41;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent text-white py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold font-serif flex items-center gap-2">
+                <i class="fas fa-mug-hot text-gold"></i> Warmindo Dua Putra
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="hover:text-gold transition font-medium">Beranda</a>
+                <a href="#about" class="hover:text-gold transition font-medium">Tentang</a>
+                <a href="#menu" class="hover:text-gold transition font-medium">Menu</a>
+                <a href="#fasilitas" class="hover:text-gold transition font-medium">Fasilitas</a>
+                <a href="#contact" class="bg-gold text-coffee-900 px-5 py-2 rounded-full font-bold hover:bg-yellow-400 transition shadow-lg transform hover:scale-105">
+                    Hubungi Kami
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-coffee-900 absolute w-full left-0 top-full shadow-xl">
+            <div class="flex flex-col p-6 space-y-4 text-center">
+                <a href="#home" class="block py-2 hover:text-gold">Beranda</a>
+                <a href="#about" class="block py-2 hover:text-gold">Tentang</a>
+                <a href="#menu" class="block py-2 hover:text-gold">Menu</a>
+                <a href="#fasilitas" class="block py-2 hover:text-gold">Fasilitas</a>
+                <a href="#contact" class="block py-2 bg-gold text-coffee-900 rounded font-bold">Hubungi Kami</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-4 pt-16">
+        <div class="max-w-4xl mx-auto text-white space-y-6 animate-fade-in-up">
+            <p class="text-gold font-serif text-xl tracking-wider uppercase mb-2">Sejak 2024</p>
+            <h1 class="text-5xl md:text-7xl font-bold font-serif leading-tight">
+                Rasa Bintang Lima, <br> <span class="text-gold">Harga Kaki Lima</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-8">
+                Tempat nongkrong paling asik, kopi mantap, internet kencang, dan Indomie yang selalu menggoda. Mari mampir, seduh ceritamu di sini.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#menu" class="bg-gold text-coffee-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition shadow-lg transform hover:-translate-y-1">
+                    Lihat Menu
+                </a>
+                <a href="#contact" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-coffee-900 transition shadow-lg transform hover:-translate-y-1">
+                    Lokasi Kami
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES / KEUNGGULAN -->
+    <section class="py-12 bg-white -mt-10 relative z-10 container mx-auto px-4 rounded-t-3xl shadow-lg md:w-3/4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-4 group hover:bg-coffee-50 rounded-xl transition duration-300">
+                <div class="w-16 h-16 bg-coffee-100 text-coffee-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:bg-coffee-700 group-hover:text-gold transition duration-300">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">WiFi Kencang</h3>
+                <p class="text-gray-600 text-sm">Cocok buat ngerjain tugas, mabar game, atau sekedar scrolling medsos tanpa buffering.</p>
+            </div>
+            <div class="p-4 group hover:bg-coffee-50 rounded-xl transition duration-300">
+                <div class="w-16 h-16 bg-coffee-100 text-coffee-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:bg-coffee-700 group-hover:text-gold transition duration-300">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Buka 24 Jam</h3>
+                <p class="text-gray-600 text-sm">Lapar tengah malam? Butuh kopi subuh-subuh? Kami selalu siap melayani.</p>
+            </div>
+            <div class="p-4 group hover:bg-coffee-50 rounded-xl transition duration-300">
+                <div class="w-16 h-16 bg-coffee-100 text-coffee-700 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl group-hover:bg-coffee-700 group-hover:text-gold transition duration-300">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Harga Bersahabat</h3>
+                <p class="text-gray-600 text-sm">Dompet aman, perut kenyang. Harga mahasiswa dan pekerja kantoran.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 relative">
+                <div class="absolute top-4 -left-4 w-full h-full border-4 border-gold rounded-xl z-0 hidden md:block"></div>
+                <!-- Gambar Barista/Warkop -->
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suasana Warkop" class="rounded-xl shadow-2xl relative z-10 w-full object-cover h-[400px]">
+            </div>
+            <div class="md:w-1/2 space-y-6">
+                <span class="text-coffee-600 font-bold uppercase tracking-wider">Tentang Kami</span>
+                <h2 class="text-4xl font-serif font-bold text-coffee-900">Lebih Dari Sekadar <span class="text-gold">Warmindo</span> Biasa</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Warmindo Dua Putra hadir dari keresahan akan mahalnya harga kopi di kafe-kafe modern. Kami mengembalikan esensi "ngopi" yang sebenarnya: Obrolan hangat, kopi hitam pekat, dan gorengan yang masih panas.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    Kami menggunakan biji kopi lokal pilihan yang diseduh dengan cara tradisional maupun modern. Indomie kami? Ah, Anda tahu sendiri, Indomie buatan Warmindo selalu lebih enak dari buatan sendiri!
+                </p>
+                
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="border-l-4 border-gold pl-4">
+                        <h4 class="font-bold text-2xl text-coffee-800">1000+</h4>
+                        <p class="text-sm text-gray-500">Pelanggan Puas</p>
+                    </div>
+                    <div class="border-l-4 border-gold pl-4">
+                        <h4 class="font-bold text-2xl text-coffee-800">50+</h4>
+                        <p class="text-sm text-gray-500">Pilihan Menu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="py-20 bg-coffee-50 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-coffee-600 font-bold uppercase tracking-wider">Menu Favorit</span>
+                <h2 class="text-4xl font-serif font-bold text-coffee-900 mt-2">Pilihan <span class="text-gold">Best Seller</span> Kami</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Dari Kopi Tubruk yang nendang sampai Indomie Telur Kornet yang creamy.</p>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <button onclick="filterMenu('all')" class="menu-filter px-6 py-2 rounded-full border border-coffee-600 text-coffee-900 hover:bg-coffee-600 hover:text-white transition active bg-coffee-600 text-white font-medium">Semua</button>
+                <button onclick="filterMenu('kopi')" class="menu-filter px-6 py-2 rounded-full border border-coffee-600 text-coffee-900 hover:bg-coffee-600 hover:text-white transition font-medium">Kopi & Minuman</button>
+                <button onclick="filterMenu('makanan')" class="menu-filter px-6 py-2 rounded-full border border-coffee-600 text-coffee-900 hover:bg-coffee-600 hover:text-white transition font-medium">Makanan Berat</button>
+                <button onclick="filterMenu('snack')" class="menu-filter px-6 py-2 rounded-full border border-coffee-600 text-coffee-900 hover:bg-coffee-600 hover:text-white transition font-medium">Camilan</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="menu-container">
+                
+                <!-- 1. Indomie Rebus Telur (Makanan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="makanan">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Indomie Rebus" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 12.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Indomie Rebus Telur</h3>
+                        <p class="text-gray-500 text-sm mb-4">Indomie kari ayam/ayam bawang dengan telur setengah matang & sawi.</p>
+                        <button onclick="orderItem('Indomie Rebus Telur')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Mie Goreng Jumbo (Makanan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="makanan">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1626804475297-411d7c28f68c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mie Goreng" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 15.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Indomie Goreng Jumbo</h3>
+                        <p class="text-gray-500 text-sm mb-4">Porsi double bikin kenyang, lengkap dengan telur ceplok.</p>
+                        <button onclick="orderItem('Indomie Goreng Jumbo')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. Nasi Goreng (Makanan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="makanan">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1603133872878-684f108fd1f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nasi Goreng" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 15.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Nasi Goreng Spesial</h3>
+                        <p class="text-gray-500 text-sm mb-4">Bumbu racikan sendiri, pedas manis gurih + kerupuk.</p>
+                        <button onclick="orderItem('Nasi Goreng Spesial')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Magelangan / Mawut (Makanan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="makanan">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Magelangan" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 16.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Magelangan (Mawut)</h3>
+                        <p class="text-gray-500 text-sm mb-4">Campuran nasi goreng dan mie goreng yang legendaris.</p>
+                        <button onclick="orderItem('Magelangan')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. Kopi Tubruk (Minuman) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="kopi">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1550950392-06495ee8c205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kopi Hitam" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 6.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Kopi Hitam Tubruk</h3>
+                        <p class="text-gray-500 text-sm mb-4">Kopi kapal api/liong bulan seduh air mendidih.</p>
+                        <button onclick="orderItem('Kopi Hitam Tubruk')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6. Kopi Susu (Minuman) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="kopi">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kopi Susu" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 8.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Kopi Susu Panas</h3>
+                        <p class="text-gray-500 text-sm mb-4">Kopi hitam + Susu kental manis putih/coklat.</p>
+                        <button onclick="orderItem('Kopi Susu Panas')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 7. Es Teh Manis (Minuman) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="kopi">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Es Teh" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 4.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Es Teh Manis Jumbo</h3>
+                        <p class="text-gray-500 text-sm mb-4">Gelas besar, gula asli, segar penghilang dahaga.</p>
+                        <button onclick="orderItem('Es Teh Manis Jumbo')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 8. Es Jeruk (Minuman) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="kopi">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Es Jeruk" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 7.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Es Jeruk Peras</h3>
+                        <p class="text-gray-500 text-sm mb-4">Jeruk peras asli (bukan sirup), vitamin C alami.</p>
+                        <button onclick="orderItem('Es Jeruk Peras')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 9. Soda Gembira (Minuman) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="kopi">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Soda Gembira" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 12.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Soda Gembira</h3>
+                        <p class="text-gray-500 text-sm mb-4">Soda fanta/sprite + susu kental manis + es batu.</p>
+                        <button onclick="orderItem('Soda Gembira')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 10. Pisang Goreng (Camilan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="snack">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1628189689408-251a5c607df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pisang Goreng" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 2.000/pcs</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Pisang Goreng Dadakan</h3>
+                        <p class="text-gray-500 text-sm mb-4">Pisang kepok kuning manis, digoreng saat dipesan.</p>
+                        <button onclick="orderItem('Pisang Goreng')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 11. Roti Bakar (Camilan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="snack">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Roti Bakar" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 10.000</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Roti Bakar Coklat Keju</h3>
+                        <p class="text-gray-500 text-sm mb-4">Roti tebal, topping melimpah sampai tumpah.</p>
+                        <button onclick="orderItem('Roti Bakar Coklat Keju')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 12. Tempe Mendoan (Camilan) -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition duration-300 menu-item" data-category="snack">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1563223689-d128dc9056d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gorengan" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-gold text-coffee-900 font-bold px-3 py-1 rounded-full text-sm">Rp 2.000/pcs</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-coffee-900 mb-2">Tempe Mendoan</h3>
+                        <p class="text-gray-500 text-sm mb-4">Tempe lebar tepung basah + sambal kecap pedas.</p>
+                        <button onclick="orderItem('Tempe Mendoan')" class="w-full block text-center border-2 border-coffee-600 text-coffee-600 font-bold py-2 rounded-lg hover:bg-coffee-600 hover:text-white transition">
+                            Pesan
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12">
+                 <a href="#contact" class="inline-block border-2 border-coffee-900 text-coffee-900 px-8 py-3 rounded-full font-bold hover:bg-coffee-900 hover:text-white transition">Lihat Menu Lainnya di Lokasi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-20 bg-white px-4">
+        <div class="container mx-auto">
+             <div class="text-center mb-16">
+                <span class="text-coffee-600 font-bold uppercase tracking-wider">Kata Mereka</span>
+                <h2 class="text-4xl font-serif font-bold text-coffee-900 mt-2">Apa Kata <span class="text-gold">Sobat Warkop?</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-coffee-200 absolute top-4 left-4"></i>
+                    <p class="text-gray-600 mb-6 italic z-10 relative">"Tempat nongkrong favorit sepulang kerja. Kopi susunya pas, nggak kemanisan. Internetnya juga kenceng buat streaming bola."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-coffee-900">Budi Santoso</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-coffee-200 absolute top-4 left-4"></i>
+                    <p class="text-gray-600 mb-6 italic z-10 relative">"Indomie telurnya juara! Kuahnya kental dan telurnya setengah matang sempurna. Harga anak kos banget."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-coffee-900">Siti Aminah</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl relative">
+                    <i class="fas fa-quote-left text-4xl text-coffee-200 absolute top-4 left-4"></i>
+                    <p class="text-gray-600 mb-6 italic z-10 relative">"Enak buat nugas skripsi. Colokan banyak, meja bersih. Pisang gorengnya nambah terus nggak kerasa."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-coffee-900">Rizky Ramadhan</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-coffee-900 text-white px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Info Kontak -->
+                <div class="lg:w-1/2 space-y-8">
+                    <div>
+                        <span class="text-gold font-bold uppercase tracking-wider">Lokasi & Kontak</span>
+                        <h2 class="text-4xl font-serif font-bold mt-2">Mampir Ke Warmindo</h2>
+                        <p class="text-gray-400 mt-4">Jangan ragu untuk datang atau menghubungi kami untuk reservasi tempat nobar atau acara komunitas.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded bg-coffee-800 flex items-center justify-center text-gold shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Alamat</h4>
+                                <p class="text-gray-400">Jl. Kopi Nikmat No. 99, Jakarta Selatan<br>(Depan Alfamart Simpang Lima)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded bg-coffee-800 flex items-center justify-center text-gold shrink-0">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">WhatsApp</h4>
+                                <p class="text-gray-400">+62 812-3456-7890</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded bg-coffee-800 flex items-center justify-center text-gold shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Jam Operasional</h4>
+                                <p class="text-gray-400">Senin - Minggu: 24 Jam Nonstop</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="flex gap-4 pt-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white text-coffee-900 flex items-center justify-center hover:bg-gold transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white text-coffee-900 flex items-center justify-center hover:bg-gold transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white text-coffee-900 flex items-center justify-center hover:bg-gold transition"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:w-1/2 bg-white text-gray-800 p-8 rounded-2xl shadow-2xl">
+                    <h3 class="text-2xl font-bold text-coffee-900 mb-6">Kirim Pesan / Kritik Saran</h3>
+                    <form id="contactForm" class="space-y-4" onsubmit="handleFormSubmit(event)">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
+                            <input type="text" placeholder="Nama Anda" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-coffee-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Nomor WhatsApp</label>
+                            <input type="tel" placeholder="08xx-xxxx-xxxx" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-coffee-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Pesan</label>
+                            <textarea rows="4" placeholder="Tulis pesan Anda..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-coffee-500" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-coffee-700 text-white font-bold py-3 rounded-lg hover:bg-coffee-800 transition shadow-lg">
+                            Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-coffee-950 text-gray-500 py-8 border-t border-gray-800 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Warmindo Dua Putra. Dibuat dengan <i class="fas fa-heart text-red-500"></i> dan Kopi.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Success (Simpel) -->
+    <div id="orderModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center px-4">
+        <div class="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-all scale-100">
+            <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Pesan via WhatsApp?</h3>
+            <p class="text-gray-600 mb-6">Anda akan diarahkan ke WhatsApp untuk memesan <span id="modalItemName" class="font-bold text-coffee-700"></span>.</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition font-medium">Batal</button>
+                <button onclick="confirmOrder()" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-bold shadow-lg">Lanjut ke WA</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-coffee-900', 'shadow-lg');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('bg-coffee-900', 'shadow-lg', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Filter Menu Logic
+        function filterMenu(category) {
+            const items = document.querySelectorAll('.menu-item');
+            const buttons = document.querySelectorAll('.menu-filter');
+            
+            // Update button styles
+            buttons.forEach(button => {
+                if (button.getAttribute('onclick').includes(category)) {
+                    button.classList.add('bg-coffee-600', 'text-white');
+                    button.classList.remove('text-coffee-900');
+                } else {
+                    button.classList.remove('bg-coffee-600', 'text-white');
+                    button.classList.add('text-coffee-900');
+                }
+            });
+
+            // Filter logic
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    // Add animation class
+                    item.classList.add('animate-fade-in');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Order System Logic
+        let currentItem = '';
+        const modal = document.getElementById('orderModal');
+        const modalItemName = document.getElementById('modalItemName');
+
+        function orderItem(itemName) {
+            currentItem = itemName;
+            modalItemName.textContent = itemName;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        function confirmOrder() {
+            // Ganti nomor ini dengan nomor WA Warkop Anda (Format 628...)
+            const phoneNumber = "6281234567890"; 
+            const text = `Halo Warmindo Dua Putra, saya mau pesan *${currentItem}*. Mohon infonya ya!`;
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+            
+            window.open(url, '_blank');
+            closeModal();
+        }
+
+        // Contact Form Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            // Simulasi pengiriman sukses
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Terkirim!";
+            btn.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                alert("Pesan Anda telah kami terima! Kami akan membalas via WhatsApp.");
+                e.target.reset();
+                btn.innerText = originalText;
+                btn.classList.remove('bg-green-500');
+            }, 1000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
